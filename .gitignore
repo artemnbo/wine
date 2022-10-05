@@ -4,3 +4,4 @@ env/
 venv/
 index.html
 .replit
+.env

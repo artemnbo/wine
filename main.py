@@ -7,7 +7,7 @@ import pandas
 import os
 from dotenv import load_dotenv
 
-YEAR_OF_FOUNDATION = 1920
+FOUNDING_YEAR = 1920
 
 
 def format_year_spelling(year):
@@ -23,9 +23,9 @@ def format_year_spelling(year):
 
 def main():
     load_dotenv()
-    data_xls = os.getenv('WINE_DATA_XLS', default='wine.xlsx')
+    excel_file_path = os.getenv('EXCEL_FILE_PATH', default='wine.xlsx')
 
-    drinks_data_frame = pandas.read_excel(data_xls, keep_default_na=False)
+    drinks_data_frame = pandas.read_excel(excel_file_path, keep_default_na=False)
     drinks_records = drinks_data_frame.to_dict('records')
 
     drinks = defaultdict(list)
@@ -38,7 +38,7 @@ def main():
     )
 
     current_year = datetime.datetime.now().year
-    winery_age = current_year - YEAR_OF_FOUNDATION
+    winery_age = current_year - FOUNDING_YEAR
     template = env.get_template('template.html')
 
     rendered_page = template.render(
